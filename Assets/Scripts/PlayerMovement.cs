@@ -1,0 +1,72 @@
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    private float speed = 7f; //speed for left and right movement
+    private float xDirection = 0f; //Player's x direction
+    private float jumpSpeed = 7f;
+
+    private Rigidbody2D playerRigidBody; //the Player object rigidBody
+    private Animator playerAnimator; //the Player's Animator
+    private SpriteRenderer sprite;
+
+
+    private void Start()
+    {
+        playerRigidBody = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
+    
+    private void Update()
+    {
+        xDirection = Input.GetAxisRaw("Horizontal");
+        playerRigidBody.velocity = new Vector2(xDirection * speed, playerRigidBody.velocity.y); //Player's velocity
+
+        
+        //if jump is pressed and Player is on terrain - jump 
+        if (Input.GetButtonDown("Jump") && !OnTerrain()) //NOTE: get rid of "!"
+        {
+            playerRigidBody.velocity = new Vector3(0, jumpSpeed,0);
+        }
+
+        SetAnimation();
+        //if left key is pressed and held - move left
+
+        //if right key is pressed and help - move right
+    }
+
+    /**
+     * Check if Player is on terrain
+     */
+    private bool OnTerrain()
+    {
+        
+        return false;
+    }
+
+    /**
+     * Sets the correct animation for the Player
+     */
+    private void SetAnimation()
+    {
+        // left animation if x is less than 0
+        if(xDirection < 0)
+        {
+            playerAnimator.SetBool("Running", true);
+            sprite.flipX = true; //flip sprite facing left
+        }
+        //right animation if x > 0
+        else if(xDirection > 0)
+        {
+            playerAnimator.SetBool("Running", true);
+            sprite.flipX = false; //flip sprite facing left
+        }
+        //idle animation if x = 0
+        else
+        {
+            playerAnimator.SetBool("Running", false);
+        }
+    }
+
+}
