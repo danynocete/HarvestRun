@@ -18,8 +18,9 @@ public class PlayerLife : MonoBehaviour
      */
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if player collides with Fly object they should die
-        if(collision.gameObject.CompareTag("Fly")){
+        //if player collides with Fly object or the ground they should die
+        if (collision.gameObject.CompareTag("Fly") || collision.gameObject.CompareTag("Ground")) 
+        {
             PlayerDies();
         }
     }
