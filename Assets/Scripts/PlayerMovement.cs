@@ -4,11 +4,13 @@ public class PlayerMovement : MonoBehaviour
 {
     private float speed = 7f; //speed for left and right movement
     private float xDirection = 0f; //Player's x direction
-    private float jumpSpeed = 7f;
+    private float jumpSpeed = 5f;
+    [SerializeField] private LayerMask ground;
 
     private Rigidbody2D playerRigidBody; //the Player object rigidBody
     private Animator playerAnimator; //the Player's Animator
     private SpriteRenderer sprite;
+    private BoxCollider2D playerBoxCollider;
 
 
     private void Start()
@@ -16,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        playerBoxCollider = GetComponent<BoxCollider2D>();
     }
     
     private void Update()
@@ -25,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         
         //if jump is pressed and Player is on terrain - jump 
-        if (Input.GetButtonDown("Jump") && !OnTerrain()) //NOTE: get rid of "!"
+        if (Input.GetButtonDown("Jump") && OnTerrain()) //NOTE: get rid of "!"
         {
             playerRigidBody.velocity = new Vector3(0, jumpSpeed,0);
         }
@@ -42,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private bool OnTerrain()
     {
         
-        return false;
+        return Physics2D.BoxCast(playerBoxCollider.bounds.center, playerBoxCollider.size, 0f, Vector2.down, .1f, ground);
     }
 
     /**
