@@ -7,6 +7,7 @@ TagManager:
   - Trap
   - Fly
   - Ground
+  - Mushroom
   layers:
   - Default
   - TransparentFX
