@@ -14,16 +14,7 @@ public class Finish : MonoBehaviour
    private void Start()
     {
         itemCollector = GetComponent<ItemCollector>();
-        
-
     }
-
-    private void Update()
-    {
-        //itemsCollected = GameObject.FindGameObjectWithTag("Player").GetComponent<ItemCollector>().getMushroomsCollected(); //number of items the PLayer has collected
-       // totalMushrooms = GameObject.FindGameObjectWithTag("Player").GetComponent<ItemCollector>().totalMushrooms(); //number of mushrooms the Player needs to collect
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,8 +35,11 @@ public class Finish : MonoBehaviour
         }
     }
 
+    /**
+     * Loads the endgame scene
+     */
     private void LoadEndGameScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2); //load endgame scene
     }
 }
