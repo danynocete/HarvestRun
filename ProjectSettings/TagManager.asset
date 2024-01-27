@@ -8,6 +8,7 @@ TagManager:
   - Fly
   - Ground
   - Mushroom
+  - Worm
   layers:
   - Default
   - TransparentFX

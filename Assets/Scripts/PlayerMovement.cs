@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float speed = 7f; //speed for left and right movement
+    private float speed = 4f; //speed for left and right movement
     private float xDirection = 0f; //Player's x direction
     private float jumpSpeed = 5f;
     [SerializeField] private LayerMask ground;

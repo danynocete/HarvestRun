@@ -22,4 +22,19 @@ public class ItemCollector : MonoBehaviour
 
         }
     }
+
+    /**
+     * Returns the number of mushrooms the Player has collected
+     */
+    public int getMushroomsCollected()
+    {
+        return mushroomsCollected;
+    }
+    /**
+     * Return the number of mushrooms the PLayer has to collect in the game
+     */
+    public int totalMushrooms()
+    {
+        return mushrooms.Count;
+    }
 }

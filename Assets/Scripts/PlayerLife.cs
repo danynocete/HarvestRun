@@ -23,8 +23,8 @@ public class PlayerLife : MonoBehaviour
      */
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if player collides with Fly object or the thorns they should and lose a life
-        if (collision.gameObject.CompareTag("Fly")|| collision.gameObject.CompareTag("Trap"))
+        //if player collides with Fly object or the thorns or red worms they should lose a life
+        if (collision.gameObject.CompareTag("Fly") || collision.gameObject.CompareTag("Worm"))
         {
             //if current lives > 0 restart level
             if(hearts.Count > 0)
@@ -32,7 +32,7 @@ public class PlayerLife : MonoBehaviour
                 Destroy(hearts[heartIndex]);
                 hearts.RemoveAt(heartIndex);
                 heartIndex = heartIndex - 1;
-                Debug.Log("hearts list: " + hearts.Count);
+                //Debug.Log("hearts list: " + hearts.Count);
             }
             //if current lives <0 game ends
             if(hearts.Count < 1)
@@ -42,7 +42,7 @@ public class PlayerLife : MonoBehaviour
             }
         }
         //if Player falls to the ground they instantly die
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Trap"))
         {
             PlayerDies();
         }
