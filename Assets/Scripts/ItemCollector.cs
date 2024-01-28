@@ -7,6 +7,7 @@ public class ItemCollector : MonoBehaviour
 {
     [SerializeField] private List<GameObject> mushrooms;
     [SerializeField] private Text mushroomCounter;
+    [SerializeField] private AudioSource collectSound;
 
     private int mushroomsCollected = 0;
 
@@ -16,6 +17,7 @@ public class ItemCollector : MonoBehaviour
         //if Player collides with a mushroom add it to items collected and make it disappear
         if (collision.gameObject.CompareTag("Mushroom"))
         {
+            collectSound.Play();
             Destroy(collision.gameObject);
             mushroomsCollected++;
             mushroomCounter.text = "Mushrooms Collected: " + mushroomsCollected + "/" + mushrooms.Count;

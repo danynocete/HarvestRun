@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private BoxCollider2D playerBoxCollider;
 
+    [SerializeField] private AudioSource jumpSound;
+
 
     private void Start()
     {
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         //if jump is pressed and Player is on terrain - jump 
         if (Input.GetButtonDown("Jump") && OnTerrain())
         {
+            jumpSound.Play();
             playerRigidBody.velocity = new Vector3(0, jumpSpeed,0);
         }
         SetAnimation();

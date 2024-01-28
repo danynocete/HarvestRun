@@ -25,14 +25,12 @@ public class Finish : MonoBehaviour
         //if the Player touches finish flag and has collected all items the game finishes
         if(collision.gameObject.name == "Player" && itemsCollected == totalMushrooms)
         {
-            Debug.Log("You win!");
-            
             LoadEndGameScene();
         }
-        else if(collision.gameObject.name == "Player" && itemsCollected != totalMushrooms)
-        {
-            Debug.Log("Need to collect more items");
-        }
+        //else if(collision.gameObject.name == "Player" && itemsCollected != totalMushrooms)
+       // {
+        //    Debug.Log("Need to collect more items");
+       // }
     }
 
     /**

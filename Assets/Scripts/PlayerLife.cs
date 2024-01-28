@@ -11,6 +11,8 @@ public class PlayerLife : MonoBehaviour
     private int heartIndex = 2;
 
     [SerializeField] private List<GameObject> hearts; //array of Heart Objects
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource hitSound;
 
     void Start()
     {
@@ -23,16 +25,16 @@ public class PlayerLife : MonoBehaviour
      */
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if player collides with Fly object or the thorns or red worms they should lose a life
+        //if player collides with Fly object or red worms they should lose a life
         if (collision.gameObject.CompareTag("Fly") || collision.gameObject.CompareTag("Worm"))
         {
             //if current lives > 0 restart level
             if(hearts.Count > 0)
             {
+                hitSound.Play();
                 Destroy(hearts[heartIndex]);
                 hearts.RemoveAt(heartIndex);
                 heartIndex = heartIndex - 1;
-                //Debug.Log("hearts list: " + hearts.Count);
             }
             //if current lives <0 game ends
             if(hearts.Count < 1)
@@ -41,7 +43,7 @@ public class PlayerLife : MonoBehaviour
                 //load Game Over scene
             }
         }
-        //if Player falls to the ground they instantly die
+        //if Player falls to the ground or touch the thorns they instantly die
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Trap"))
         {
             PlayerDies();
@@ -53,6 +55,7 @@ public class PlayerLife : MonoBehaviour
      */
     private void PlayerDies()
     {
+        deathSound.Play();
         playerAnimator.SetTrigger("Die");
         playerRigidBody.bodyType = RigidbodyType2D.Static; //make Player static
     }
@@ -63,6 +66,5 @@ public class PlayerLife : MonoBehaviour
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //load scene that the user is on
-   
     }
 }
