@@ -25,8 +25,9 @@ public class PlayerMovement : MonoBehaviour
     {
         xDirection = Input.GetAxisRaw("Horizontal");
         playerRigidBody.velocity = new Vector2(xDirection * speed, playerRigidBody.velocity.y); //Player's velocity
+
         //if jump is pressed and Player is on terrain - jump 
-        if (Input.GetButtonDown("Jump") && OnTerrain()) //NOTE: get rid of "!"
+        if (Input.GetButtonDown("Jump") && OnTerrain())
         {
             playerRigidBody.velocity = new Vector3(0, jumpSpeed,0);
         }
